@@ -1,6 +1,24 @@
 {% extends "taskzilla/base.html" %}
 	{% block maincontent %}
-		{% for task in tasks_list %}
-  			<li><b>{{ task.id }}</b> {{ task.title }}</li>
-		{% endfor %}
+		<div class="container">
+			
+		<div class="table-responsive col-sm-10 col-sm-offset-1">
+			<table class="table table-hover table-striped table-bordered text-center">
+				<thead>
+					<tr>
+						<th class="text-center col-sm-1">Task ID</th>
+						<th class="text-center col-sm-9">Task Title</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for task in tasks_list %}
+						<tr>
+							<td> {{ task.id }} </td>
+							<td><a href="tasks/{{ task.id }}"> {{ task.title }} </a></td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+		</div>
 	{% endblock maincontent %}
