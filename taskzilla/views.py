@@ -9,5 +9,5 @@ def index(request):
 
 def task_page(request, task_id):
 	task = Task.objects.get(pk=task_id)
-	context = {'task' : task}
+	context = {'task' : task, 'comments': task.comment_set.all()}
 	return render(request, 'taskzilla/task_page.html', context)
