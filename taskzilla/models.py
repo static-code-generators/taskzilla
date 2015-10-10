@@ -27,6 +27,7 @@ class Comment(models.Model):
 	id = models.AutoField(primary_key=True)
 	text = models.TextField(default = '')
 	task = models.ForeignKey(Task)
+	user = models.ForeignKey(UserProfile)
 
 # class UserTask(models.Model):
 #	task = models.ForeignKey(Task)
