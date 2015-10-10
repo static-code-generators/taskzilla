@@ -15,6 +15,7 @@ class UserProfile(models.Model):
 class Task(models.Model):
 	id = models.AutoField(primary_key=True)
 	title = models.CharField(max_length = 200)
+	description = models.TextField(default = '')
 	pub_date = models.DateTimeField('date published')
 	subscribers = models.ManyToManyField(UserProfile, related_name='tasks')
 
@@ -22,6 +23,6 @@ class Task(models.Model):
 		return self.title
 
 # class UserTask(models.Model):
-# 	task = models.ForeignKey(Task)
-# 	# user = models.ForeignKey(settings.AUTH_USER_MODEL)
-# 	user = models.ForeignKey(UserProfile)
+#	task = models.ForeignKey(Task)
+#	# user = models.ForeignKey(settings.AUTH_USER_MODEL)
+#	user = models.ForeignKey(UserProfile)
