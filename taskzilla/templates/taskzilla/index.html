@@ -1,10 +1,6 @@
-<html>
-<head>
-  <title>Fuck You! This is taskzilla</title>
-</head>
-
-<body>
-{% for task in tasks_list %}
-  <li><b>{{ task.id }}</b> {{ task.title }}</li>
-{% endfor %}
-</body>
+{% extends "taskzilla/base.html" %}
+	{% block maincontent %}
+		{% for task in tasks_list %}
+  			<li><b>{{ task.id }}</b> {{ task.title }}</li>
+		{% endfor %}
+	{% endblock maincontent %}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<title>
+		Something Cool
+	</title>
+</head>
+<body>
+	<!-- NavBar Start -->
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+		    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span> 
+			</button>
+		    <a class="navbar-brand" href="index.html">Something Cool</a>
+	    </div>
+	    <div class="collapse navbar-collapse" id="myNavbar">
+	      <ul class="nav navbar-nav navbar-right" style="margin-right: -30px">
+	        <li><a href="#" data-toggle="modal" data-target="#signup_modal"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+		    <li><a href="#" data-toggle="modal" data-target="#login_modal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+	      </ul>
+	    </div>
+	  </div>
+	</nav>
+	<!-- SignUp Modal Start-->
+	<div class="modal fade" id="signup_modal" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title text-center">Sign Up</h4>
+				</div>
+				<div class="modal-body">
+					<form action="/signup/" method="post" role="sign_form">
+						<div class="form-group">
+							<label for="name">Name:</label>
+							<input type="text" class="form-control" id="signup_name">
+						</div>
+						<div class="form-group">
+							<label for="username">Username:</label>
+							<input type="text" class="form-control" id="signup_username">
+						</div>
+						<div class="form-group">
+							<label for="pwd">Password:</label>
+							<input type="password" class="form-control" id="signup_pwd">
+						</div>
+						<div class="form-group">
+							<label for="email">Email address:</label>
+							<input type="email" class="form-control" id="signup_email">
+						</div>
+						<div class="modal-footer" style="border: 0px !important">
+							<button type="button" class="btn btn-primary btn-default" data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-primary btn-default">Submit</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- SignUp Modal End -->
+	<!-- Login Modal Start-->
+	<div class="modal fade" id="login_modal" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title text-center">Login</h4>
+				</div>
+				<div class="modal-body">
+					<form action="/login/" method="post" role="login_form">
+						<div class="form-group">
+							<label for="username">Username:</label>
+							<input type="text" class="form-control" id="signup_username">
+						</div>
+						<div class="form-group">
+							<label for="pwd">Password:</label>
+							<input type="password" class="form-control" id="signup_pwd">
+						</div>
+						<div class="modal-footer" style="border: 0px !important">
+							<button type="button" class="btn btn-primary btn-default" data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-primary btn-default">Submit</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Login Modal End -->
+	<!-- NavBar End -->
+
+	{% block maincontent %}
+
+	{% endblock maincontent %}
+
+</body>
+</html>
