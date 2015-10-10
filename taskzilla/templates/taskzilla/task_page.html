@@ -1,8 +1,9 @@
 {% extends "taskzilla/base.html" %}
 	{% block maincontent %}
-		<div class="container">
-		<h2>{{ task.title }}</h2>
-		<h3> <small>Task ID: {{ task.id }} </small></h3>
-		<p>{{ task.description }}</h2>
+		<div class="container" style="background-color: #f3f3f3;">
+			<h2 class="text-center">{{ task.title }}</h2>
+			<h4> <small>Task ID: {{ task.id }} </small></h4>
+			<hr>
+			<p>{{ task.description }}</h2>
 		</div>
 	{% endblock maincontent %}
