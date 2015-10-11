@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from .models import Task
 
 def index(request):
@@ -13,6 +13,9 @@ def task_page(request, task_id):
 	return render(request, 'taskzilla/task_page.html', context)
 
 def login_page(request):
+	if request.user.is_authenticated:
+		return index(request)
+
 	if request.method == 'POST':
 		username = request.POST['username']
 		password = request.POST['password']
@@ -22,3 +25,7 @@ def login_page(request):
 			login(request, user)
 			return render(request, 'taskzilla/login.html', {'loggedin' : True})
 	return render(request, 'taskzilla/login.html', {'loggedin': False})
+
+def logout_page(request):
+	logout (request)
+	return index(request)
