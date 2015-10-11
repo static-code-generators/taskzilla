@@ -1,0 +1,14 @@
+{% extends "taskzilla/base.html" %}
+	{% block maincontent %}
+	<form action="/login/" method="post">
+	{% csrf_token %}
+	  Naam daal bc: <input name="username">
+	  Kuch badiya daal chutiye: <input name="password" type="password">
+	  <button type="submit">Submit Kar maakelode</button>
+	</form>
+
+	  {% if loggedin %}
+	    Tu login ho gya hai bkl
+      {% endif %}
+	{% endblock maincontent %}
+
