@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponseRedirect
 from .models import Task
 
 def index(request):
@@ -13,8 +14,8 @@ def task_page(request, task_id):
 	return render(request, 'taskzilla/task_page.html', context)
 
 def login_page(request):
-	if request.user.is_authenticated:
-		return index(request)
+	if request.user.is_authenticated():
+		return HttpResponseRedirect('/')
 
 	if request.method == 'POST':
 		username = request.POST['username']
@@ -23,11 +24,11 @@ def login_page(request):
 		print(user, username, password)
 		if user is not None:
 			login(request, user)
-			return index(request)
+			return HttpResponseRedirect('/')
 		else:
 			return render(request, 'taskzilla/login.html')
 	return render(request, 'taskzilla/login.html')
 
 def logout_page(request):
 	logout (request)
-	return index(request)
+	return HttpResponseRedirect('/')
