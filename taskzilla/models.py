@@ -29,6 +29,7 @@ class Comment(models.Model):
 	task = models.ForeignKey(Task)
 	user = models.ForeignKey(UserProfile, default = '')
 
+
 # class UserTask(models.Model):
 #	task = models.ForeignKey(Task)
 #	# user = models.ForeignKey(settings.AUTH_USER_MODEL)
