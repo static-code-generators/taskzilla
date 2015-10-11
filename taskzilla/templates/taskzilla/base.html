@@ -26,7 +26,7 @@
 	    <div class="collapse navbar-collapse" id="myNavbar">
 	      <ul class="nav navbar-nav navbar-right" style="margin-right: -30px">
 			{% if user.is_authenticated %}
-				<li><a href="/profile/{{ user.get_username }}">{{ user.get_username }}</a></li>
+				<li><a href="#">{{ user.get_username }}</a></li>
 		    	<li><a href="/logout"><span class="glyphicon glyphicon-off"></span></a></li>
 		    {% else %}
 		        <li><a href="/signup"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>

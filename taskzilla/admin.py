@@ -7,6 +7,7 @@ from .models import Task, UserProfile, Comment
 
 class CommentInline(admin.StackedInline):
 	model = Comment
+	extra = 0
 
 class TaskAdmin(admin.ModelAdmin):
 	inlines = [CommentInline]
