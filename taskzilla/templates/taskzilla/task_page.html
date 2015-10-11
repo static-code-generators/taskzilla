@@ -16,5 +16,16 @@
 				<footer>{{ comment.user }}</footer>
 				</blockquote>				
 			{% endfor %}
+			<blockquote >
+				<form action="/task/{{ task.id }}" method="post">
+					{% csrf_token %}
+					<div class="form-group">
+						<h3 for="comment"><small>Add comment:</small></h3>
+						<textarea name="text" class="form-control" rows="5" style="max-width: 80%;"></textarea>
+					</div>
+
+					<button class="btn btn-primary" type="submit">Submit</button>
+				</form>
+			</blockquote>
 		</div>
 	{% endblock maincontent %}

@@ -25,8 +25,15 @@
 	    </div>
 	    <div class="collapse navbar-collapse" id="myNavbar">
 	      <ul class="nav navbar-nav navbar-right" style="margin-right: -30px">
-	        <li><a href="#" data-toggle="modal" data-target="#signup_modal"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
-		    <li><a href="#" data-toggle="modal" data-target="#login_modal"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+			{% if user.is_authenticated %}
+				<li><a href="/profile/{{ user.get_username }}">{{ user.get_username }}</a></li>
+		    	<li><a href="/logout"><span class="glyphicon glyphicon-off"></span></a></li>
+		    {% else %}
+		        <li><a href="/signup"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
+			    <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+		    {% endif %}
+
+
 	      </ul>
 	    </div>
 	  </div>
