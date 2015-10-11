@@ -23,8 +23,10 @@ def login_page(request):
 		print(user, username, password)
 		if user is not None:
 			login(request, user)
-			return render(request, 'taskzilla/login.html', {'loggedin' : True})
-	return render(request, 'taskzilla/login.html', {'loggedin': False})
+			return index(request)
+		else:
+			return render(request, 'taskzilla/login.html')
+	return render(request, 'taskzilla/login.html')
 
 def logout_page(request):
 	logout (request)
