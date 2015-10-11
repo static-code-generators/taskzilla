@@ -3,7 +3,18 @@
 		<div class="container" style="background-color: #f3f3f3;">
 			<h2 class="text-center">{{ task.title }}</h2>
 			<h4> <small>Task ID: {{ task.id }} </small></h4>
-			<hr>
+			<!-- <hr> -->
 			<p>{{ task.description }}</h2>
+		</div>
+		<!-- <h2 class=""> Comments </h2> -->
+		<div class="container col-sm-offset-1">
+			
+			{% for comment in comments %}
+				<blockquote style="margin: 0px; border-color: #888;">
+					
+				{{ comment.text }}
+				<footer>Fucker</footer>
+				</blockquote>				
+			{% endfor %}
 		</div>
 	{% endblock maincontent %}
