@@ -25,10 +25,10 @@ def task_page(request, task_id):
 	return render(request, 'taskzilla/task_page.html', context)
 
 def subscribe (request, task_id):
-	if (request.user.is_authenticated())
-		user = UserProfile.objects.get (user=request.user)
-		task = Task.objects.get (id=task_id)
-		task.subscribers.add (user)
+	# if (request.user.is_authenticated())
+	user = UserProfile.objects.get (user=request.user)
+	task = Task.objects.get (id=task_id)
+	task.subscribers.add (user)
 	return HttpResponseRedirect('/tasks/' + str(task_id))
 
 def login_page(request):
