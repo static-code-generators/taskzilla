@@ -17,7 +17,7 @@
 			{% endfor %}
 			{% if user.is_authenticated %}
 				<blockquote >
-					<form action="/tasks/{{ task.id }}" method="post">
+					<form action="/tasks/{{ task.id }}/" method="post">
 						{% csrf_token %}
 						<div class="form-group">
 							<h3 for="comment"><small>Add comment:</small></h3>
