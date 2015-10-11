@@ -2,9 +2,23 @@
 	{% block maincontent %}
 		<div class="container" style="background-color: #f3f3f3;">
 			<h2 class="text-center">{{ task.title }}</h2>
-			<h4> <small>Task ID: {{ task.id }} </small></h4>
+			<h4 class="text-left"> 
+				<small class="text-left">Task ID: {{ task.id }} </small>
+				{% if user.is_authenticated %}
+				<div class="" style="float:right">
+						<a href="/subscribe/{{ task.id }}/" class="text-right"><button class="btn btn-primary">Subscribe</button></a>
+				</div>
+				{% endif %}
+			</h4>
+			
 			<!-- <hr> -->
-			<p>{{ task.description }}</h2>
+			<p>{{ task.description }}</p>
+			<p>
+			Subscribers:
+				{% for user in task.subscribers.all %}
+					{{ user }}
+				{% endfor %}
+			</p>
 		</div>
 		<!-- <h2 class=""> Comments </h2> -->
 		<div class="container col-sm-offset-1">
