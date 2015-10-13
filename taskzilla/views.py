@@ -13,12 +13,12 @@ def task_page(request, task_id):
 	try:
 		task = Task.objects.get(pk=task_id)
 	except ObjectDoesNotExist:
-		return HttpResponseRedirect ('/')
+		return HttpResponseRedirect('/')
 	subscribed = (request.user.is_authenticated() and task.subscribers.filter(user=request.user).count() > 0)
 	context = {'task' : task, 'comments': task.comment_set.all(), 'user' : request.user, 'subscribed' : subscribed}
 
 	if request.method == 'POST' and request.user.is_authenticated():
-		user = UserProfile.objects.get (user=request.user)
+		user = UserProfile.objects.get(user=request.user)
 		comment_text = request.POST['text']
 		comment = Comment()
 		comment.text = comment_text
@@ -36,7 +36,7 @@ def subscribe (request, task_id):
 	except ObjectDoesNotExist:
 		return HttpResponseRedirect('/')
 
-	task.subscribers.add (user)
+	task.subscribers.add(user)
 	return HttpResponseRedirect('/tasks/' + str(task_id))
 
 def unsubscribe (request, task_id):
@@ -47,7 +47,7 @@ def unsubscribe (request, task_id):
 		return HttpResponseRedirect('/')
 
 	if (task.subscribers.filter(user=request.user).count() > 0):
-		task.subscribers.remove (user)
+		task.subscribers.remove(user)
 	return HttpResponseRedirect('/tasks/' + str(task_id))	
 
 def login_page(request):
@@ -76,5 +76,5 @@ def profile_page(request, username):
 	return render(request, 'taskzilla/profile_page.html', context)
 
 def logout_page(request):
-	logout (request)
+	logout(request)
 	return HttpResponseRedirect('/')
