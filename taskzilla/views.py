@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
+from django.core.exceptions import ObjectDoesNotExist
 from .models import Task, Comment, UserProfile
 
 def index(request):
@@ -53,6 +54,14 @@ def login_page(request):
 		else:
 			return render(request, 'taskzilla/login.html')
 	return render(request, 'taskzilla/login.html')
+
+def profile_page(request, username):
+	try:
+		user = UserProfile.objects.get (user__username=username)
+	except ObjectDoesNotExist:
+		return HttpResponseRedirect ('/')
+	context = {'user' : user}
+	return render(request, 'taskzilla/profile_page.html', context)
 
 def logout_page(request):
 	logout (request)
