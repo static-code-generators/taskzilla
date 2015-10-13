@@ -10,7 +10,8 @@ def index(request):
 
 def task_page(request, task_id):
 	task = Task.objects.get(pk=task_id)
-	context = {'task' : task, 'comments': task.comment_set.all(), 'user' : request.user}
+	subscribed = (request.user.is_authenticated() and task.subscribers.filter(user=request.user).count() > 0)
+	context = {'task' : task, 'comments': task.comment_set.all(), 'user' : request.user, 'subscribed' : subscribed}
 
 	if request.method == 'POST' and request.user.is_authenticated():
 		user = UserProfile.objects.get (user=request.user)
@@ -29,6 +30,13 @@ def subscribe (request, task_id):
 	task = Task.objects.get (id=task_id)
 	task.subscribers.add (user)
 	return HttpResponseRedirect('/tasks/' + str(task_id))
+
+def unsubscribe (request, task_id):
+	user = UserProfile.objects.get (user=request.user)
+	task = Task.objects.get (id=task_id)
+	if (task.subscribers.filter(user=request.user).count() > 0):
+		task.subscribers.remove (user)
+	return HttpResponseRedirect('/tasks/' + str(task_id))	
 
 def login_page(request):
 	if request.user.is_authenticated():

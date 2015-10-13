@@ -5,9 +5,15 @@
 			<h4 class="text-left"> 
 				<small class="text-left">Task ID: {{ task.id }} </small>
 				{% if user.is_authenticated %}
-				<div class="" style="float:right">
-						<a href="/subscribe/{{ task.id }}/" class="text-right"><button class="btn btn-primary">Subscribe</button></a>
-				</div>
+					{% if subscribed %}
+					<div class="" style="float:right">
+							<a href="/unsubscribe/{{ task.id }}/" class="text-right"><button class="btn btn-primary">Unsubscribe</button></a>
+					</div>
+					{% else %}
+					<div class="" style="float:right">
+							<a href="/subscribe/{{ task.id }}/" class="text-right"><button class="btn btn-primary">Subscribe</button></a>
+					</div>
+					{% endif %}
 				{% endif %}
 			</h4>
 			
