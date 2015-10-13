@@ -72,7 +72,7 @@ def profile_page(request, username):
 	except ObjectDoesNotExist:
 		return HttpResponseRedirect('/')
 
-	context = {'user' : user}
+	context = {'user' : request.user, 'user_view' : user, }
 	return render(request, 'taskzilla/profile_page.html', context)
 
 def logout_page(request):
