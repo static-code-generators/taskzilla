@@ -10,7 +10,10 @@ def index(request):
 	return render(request, 'taskzilla/index.html', context)
 
 def task_page(request, task_id):
-	task = Task.objects.get(pk=task_id)
+	try:
+		task = Task.objects.get(pk=task_id)
+	except ObjectDoesNotExist:
+		return HttpResponseRedirect ('/')
 	subscribed = (request.user.is_authenticated() and task.subscribers.filter(user=request.user).count() > 0)
 	context = {'task' : task, 'comments': task.comment_set.all(), 'user' : request.user, 'subscribed' : subscribed}
 
@@ -27,14 +30,22 @@ def task_page(request, task_id):
 	return render(request, 'taskzilla/task_page.html', context)
 
 def subscribe (request, task_id):
-	user = UserProfile.objects.get (user=request.user)
-	task = Task.objects.get (id=task_id)
+	try:
+		user = UserProfile.objects.get(user=request.user)
+		task = Task.objects.get(id=task_id)
+	except ObjectDoesNotExist:
+		return HttpResponseRedirect('/')
+
 	task.subscribers.add (user)
 	return HttpResponseRedirect('/tasks/' + str(task_id))
 
 def unsubscribe (request, task_id):
-	user = UserProfile.objects.get (user=request.user)
-	task = Task.objects.get (id=task_id)
+	try:
+		user = UserProfile.objects.get(user=request.user)
+		task = Task.objects.get(id=task_id)
+	except ObjectDoesNotExist:
+		return HttpResponseRedirect('/')
+
 	if (task.subscribers.filter(user=request.user).count() > 0):
 		task.subscribers.remove (user)
 	return HttpResponseRedirect('/tasks/' + str(task_id))	
@@ -57,9 +68,10 @@ def login_page(request):
 
 def profile_page(request, username):
 	try:
-		user = UserProfile.objects.get (user__username=username)
+		user = UserProfile.objects.get(user__username=username)
 	except ObjectDoesNotExist:
-		return HttpResponseRedirect ('/')
+		return HttpResponseRedirect('/')
+
 	context = {'user' : user}
 	return render(request, 'taskzilla/profile_page.html', context)
 
