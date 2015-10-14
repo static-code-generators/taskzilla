@@ -31,7 +31,7 @@ def task_page(request, task_id):
 	return render(request, 'taskzilla/task_page.html', context)
 
 @login_required(login_url = '/login/')
-def subscribe (request, task_id):
+def subscribe(request, task_id):
 	try:
 		user = UserProfile.objects.get(user=request.user)
 		task = Task.objects.get(id=task_id)
@@ -42,7 +42,7 @@ def subscribe (request, task_id):
 	return HttpResponseRedirect('/tasks/' + str(task_id))
 
 @login_required(login_url = '/login/')
-def unsubscribe (request, task_id):
+def unsubscribe(request, task_id):
 	try:
 		user = UserProfile.objects.get(user=request.user)
 		task = Task.objects.get(id=task_id)
