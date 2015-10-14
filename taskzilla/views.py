@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.decorators import login_required
 from .models import Task, Comment, UserProfile
 
 def index(request):
@@ -29,6 +30,7 @@ def task_page(request, task_id):
 
 	return render(request, 'taskzilla/task_page.html', context)
 
+@login_required(login_url = '/login/')
 def subscribe (request, task_id):
 	try:
 		user = UserProfile.objects.get(user=request.user)
@@ -39,6 +41,7 @@ def subscribe (request, task_id):
 	task.subscribers.add(user)
 	return HttpResponseRedirect('/tasks/' + str(task_id))
 
+@login_required(login_url = '/login/')
 def unsubscribe (request, task_id):
 	try:
 		user = UserProfile.objects.get(user=request.user)
@@ -71,7 +74,6 @@ def profile_page(request, username):
 		user = UserProfile.objects.get(user__username=username)
 	except ObjectDoesNotExist:
 		return HttpResponseRedirect('/')
-
 	context = {'user' : request.user, 'user_view' : user, }
 	return render(request, 'taskzilla/profile_page.html', context)
 
