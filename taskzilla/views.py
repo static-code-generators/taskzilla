@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from .models import Task, Comment, UserProfile
 
 def index(request):
@@ -76,6 +77,32 @@ def profile_page(request, username):
 		return HttpResponseRedirect('/')
 	context = {'user' : request.user, 'user_view' : user, }
 	return render(request, 'taskzilla/profile_page.html', context)
+
+def signup_page(request):
+	context = {'error_msg' : None, 'display' : None}
+
+	if request.user.is_authenticated():
+		return HttpResponseRedirect('/')
+
+	if request.method == 'POST':
+		username = request.POST['username']
+		if UserProfile.objects.filter(user__username=username).exists():
+			context['error_msg'] = 'Username already taken :/'
+			return render(request, 'taskzilla/signup.html', context)
+		password = request.POST['password']
+		passwordRe = request.POST['passwordRe']
+		if password != passwordRe:
+			context['error_msg'] = 'Passwords do not match'
+			return render(request, 'taskzilla/signup.html', context)
+		# Username is free to be alotted, and the passwords match
+		up = UserProfile()
+		up.user = User.objects.create_user(username=username, password=password)
+		up.user.save()
+		up.save()
+		context['display'] = 'Your registeration was successful. You can try logging in now.'
+		return render(request, 'taskzilla/signup.html', context)
+
+	return render(request, 'taskzilla/signup.html', context)
 
 def logout_page(request):
 	logout(request)
